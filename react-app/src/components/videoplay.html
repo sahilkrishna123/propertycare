@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        video {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.video-wrapper {
+  border: 2px solid #000;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+    </style>
+</head>
+<body>
+
+    <div class="video-wrapper">
+        <video playsinline autoplay muted loop poster="cake.jpg">
+          <source src="homepage.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- <video width={320} height={240} autoPlay="" controls="controls">
+        <source src="D:\NED 4TH SEMESTER\Property Care\react-app\src\assets\homepage.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+      </video> -->
+    
+</body>
+</html>
