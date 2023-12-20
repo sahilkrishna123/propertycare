@@ -49,6 +49,12 @@ function Navbar() {
                       Search Property
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink className="nav-link" to="/map">
+                      Search on Map
+                    </NavLink>
+                  </li>
+
 
                   <li className="navbar-item">
                     <a className="nav-link" href="/portfolio">

@@ -9,7 +9,7 @@ import PrivateComponent from "./components/PrivateComponent";
 import Search from "./pages/Search";
 import AddProperty from "./pages/AddProperty";
 import Portfolio from "./pages/Portfolio";
-// import Gallery from "./pages/Gallery";
+import MapPage from "./pages/MapPage";
 
 function App() {
   return (
@@ -19,11 +19,11 @@ function App() {
 
         <Routes>
           <Route element={<PrivateComponent />} />
-
           <Route path="/" index element={<Home />} />
           <Route path="/contact" index element={<Contact />} />
           <Route path="/register" index element={<Register />} />
           <Route path="/search" index element={<Search />} />
+          <Route path="/map" index element={<MapPage />} />
           <Route path="/addproperty" index element={<AddProperty />} />
           <Route path="/portfolio" index element={<Portfolio />} />
           {/* <Route path="/gallery" index element={<Gallery />} /> */}

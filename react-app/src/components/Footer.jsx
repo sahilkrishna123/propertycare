@@ -3,8 +3,8 @@ import React from "react";
 function Footer() {
   return (
     <footer>
-      <div className="footer">
-        <div className="container-fluid custom_footer">
+      <div className="footer" >
+        <div className="container-fluid custom_footer" style={{backgroundColor:"rgb(19 67 162)"}}>
           <div className="row footer_row_1">
             <center>
               <h3>
@@ -30,7 +30,7 @@ function Footer() {
               </div>
             </form>
           </div>
-          <div className="row footer_row_2 ">
+          <div className="row footer_row_2 " style={{marginTop:"-80px"}}>
             <div className="col-lg-3">
               <h4 className="text-center">Company</h4>
               <ul>
