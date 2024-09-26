@@ -2,13 +2,7 @@ import  mysql from 'mysql2';
 import fs from 'fs';
 
 // Create a connection to the remote database
-const connection = mysql.createConnection({
-  host: 'mysql-property-care-property-care.g.aivencloud.com',
-  user: 'avnadmin',
-  password: 'AVNS_znTDko7k5ndLCM74xyh',
-  database: 'property-care-mysql-db',
-  port: 22637
-});
+
 // Read the SQL file
 const sqlFile = fs.readFileSync('./stateagency.sql', 'utf8');
 
