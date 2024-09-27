@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 
 // import viewRouter from "./routes/viewRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import propertyRouter from "./routes/propertyRoutes.js";
 // import schoolRouter from "./routes/schoolRoutes.js";
 import AppError from "./utils/appError.js";
 // import globalErrorHandler from "./controllers/errorController.js";
@@ -63,8 +64,8 @@ app.use("/api", limiter);
 dotenv.config({ path: "./config.env" });
 
 // Body parser, reading data from body into req.body
-app.use(express.json({ limit: "10kb" }));
-app.use(express.urlencoded({ extended: true, limit: "10kb" }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Data sanitization against NoSQL query injection
@@ -120,7 +121,7 @@ app.use(compression());
 
 // Routes
 app.use("/api/v1/users", userRouter);
-// app.use("/api/v1/schools", schoolRouter);
+app.use("/api/v1/properties", propertyRouter);
 
 // Error Handling
 app.all("*", (req, res, next) => {

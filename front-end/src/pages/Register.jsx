@@ -55,28 +55,32 @@ function Register() {
 
     const formData = new FormData();
     formData.append("name", name);
-  formData.append("password", password);
-  formData.append("passwordConfirm", password); // Make sure this matches the backend requirement
-  formData.append("contact", contact);
-  formData.append("email", email);
-  formData.append("usertype", usertype);
-  formData.append("photo", image); // Photo field for image upload
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("passwordConfirm", password); // Make sure this matches the backend requirement
+    formData.append("contact", contact);
+    formData.append("usertype", usertype);
+    formData.append("photo", image); // Photo field for image upload
 
     const response = await axios.post(
-      "http://localhost:5000/api/v1/users/register",
+      "http://localhost:5000/api/v1/users/signup",
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
 
-    console.log("image is", image);
-    console.log(response.data.message);
+    const status = response.data.status;
 
-    const { success, message, userData } = response.data;
-    localStorage.setItem("user", JSON.stringify(message));
+    if (status == "success") {
+      setRegistrationSuccess(true); // Set registration success state
 
-    console.log(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      alert("Registered in successfully");
+      navigate("/");
+    }
+
+    // console.log(response.data);
     setRegistrationSuccess(true); // Set registration success state
     setname(""); // Clear input fields
     setPassword("");
@@ -99,7 +103,7 @@ function Register() {
               type="text"
               name="name"
               id="name"
-              placeholder="name"
+              placeholder="Name"
               value={name}
               onChange={handlenameChange}
             />

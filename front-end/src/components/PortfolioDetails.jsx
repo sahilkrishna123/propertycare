@@ -7,17 +7,17 @@ function PortfolioDetails() {
   const [error, setError] = useState(null);
   const storedUser = localStorage.getItem("user");
   const userjson = JSON.parse(storedUser);
-  const id = userjson.userid;
-  console.log("ID is: ", id);
+  const id = userjson.data.user._id;
 
   useEffect(() => {
     const fetchPortfolio = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/portfolio/${id}`
+          `http://localhost:5000/api/v1/users/portfolio/${id}`
         );
-        setPortfolio(response.data);
-        // console.log("res: ",response.data);
+
+        setPortfolio(response.data.data);
+        console.log("res: ", response.data);
         setError(null);
       } catch (error) {
         setError("Error fetching portfolio details: " + error.message);
@@ -58,9 +58,10 @@ function PortfolioDetails() {
           height="300px"
         />
         <div className="container">
-          <h2> {portfolio.User_Name}</h2>
-          <p>Phone: {portfolio.Contact}</p>
-          <p>Email: {portfolio.Email}</p>
+          {console.log("name", portfolio.data)}
+          <h2> {portfolio.name}</h2>
+          <p>Phone: {portfolio.contact}</p>
+          <p>Email: {portfolio.email}</p>
         </div>
       </div>
 
@@ -89,7 +90,7 @@ function PortfolioDetails() {
                   <h3 className="card-title">{property.Desciption}</h3>
                   <div className="card-text ">
                     <br />
-                    <h4>Price: ${property.Price}</h4>
+                    <h4>Price: ${ property.Price}</h4>
                     <div className="div_room_status">
                       <h4>Rooms: {property.Room}</h4>
                       <h4>Status: {property.Status}</h4>
@@ -110,30 +111,3 @@ function PortfolioDetails() {
 }
 
 export default PortfolioDetails;
-
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-
-// function PortfolioDetails() {
-
-//     const [portfolio, setPortfolio] = useState([]);
-
-//     const storedUser = localStorage.getItem("user");
-//     const userjson = JSON.parse(storedUser);
-//     const id = userjson.userid;
-//     console.log("ID is: ", id);
-
-//         const response = axios.get(
-//           `http://localhost:5000/portfolio/${id}`
-//         );
-//         setPortfolio(response.data);
-
-//       console.log("USER details are:",portfolio);
-
-//     return (
-//         <>
-
-//         </>
-//     );
-// }
-// export default PortfolioDetails;

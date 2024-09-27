@@ -35,7 +35,8 @@ export const uploadUserPhoto = upload.single("photo");
 export const resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
-  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+  // req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+  req.file.filename = `user-${Date.now()}.jpg`;
 
   await sharp(req.file.buffer)
     .resize(500, 500)
@@ -59,6 +60,7 @@ export const getDashboard = catchAsync(async (req, res, next) => {
 });
 
 export const getMe = catchAsync(async (req, res, next) => {
+  console.log(res.params);
   req.params.id = req.user.id;
   next();
 });

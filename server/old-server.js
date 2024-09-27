@@ -81,7 +81,6 @@ app.post("/api/addproperty", upload2.single("image"), (req, res) => {
       zipcode,
       image2.buffer,
       id,
-      // image2.toString("base64"),
     ],
     (err, result) => {
       if (err) {

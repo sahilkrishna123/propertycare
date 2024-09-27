@@ -32,7 +32,7 @@ function Navbar() {
             <ul className="navbar-nav ms-auto">
               <li className="navbar-item">
                 <NavLink className="nav-link" to="/">
-                  HOME
+                  Home
                 </NavLink>
               </li>
 
@@ -40,7 +40,7 @@ function Navbar() {
                 <>
                   <li>
                     <NavLink className="nav-link" to="/addproperty">
-                      ADD Property
+                      Add Property
                     </NavLink>
                   </li>
 
@@ -55,12 +55,10 @@ function Navbar() {
                     </NavLink>
                   </li>
 
-
                   <li className="navbar-item">
                     <a className="nav-link" href="/portfolio">
-                   
-                    {auth && JSON.parse(auth)?.userName}
                     
+                      {/* {auth && JSON.parse(auth)?.data.user.name} */}
                     </a>
                   </li>
 
@@ -74,7 +72,7 @@ function Navbar() {
                 <>
                   <li>
                     <NavLink className="nav-link" to="/contact">
-                      LOG IN
+                      Log In
                     </NavLink>
                   </li>
                   <li>
@@ -99,8 +97,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-{
-  /* <Link to="/">Home</Link>
-<Link to="/about">About US</Link> */
-}
