@@ -17,14 +17,16 @@ const PropertyList = () => {
 
   const handleSearch = async () => {
     try {
+
       const response = await axios.get(
-        `http://localhost:5000/filter?city=${selectedCity}&rooms=${selectedRooms}&status=${selectedStatus}`
+        `http://localhost:5000/api/v1/properties/search-property?city=${selectedCity}&rooms=${selectedRooms}&status=${selectedStatus}`
       );
-      setProperties(response.data);
+      setProperties(response.data.data);
       setResultMessage(response.data.length === 0 ? "Result not found" : "");
-      console.log(response.data);
     } catch (error) {
       console.error("Error fetching search results:", error);
+      setProperties([]);
+
     }
   };
 
@@ -109,8 +111,8 @@ const PropertyList = () => {
                       >
                         <option>Select Status</option>
                         <option value="">All</option>
-                        <option value="rent">Rent</option>
-                        <option value="sale">Sale</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Sell">Sell</option>
                       </select>
                     </div>
 
@@ -134,13 +136,17 @@ const PropertyList = () => {
         <h1>{resultMessage}</h1>
       </center>
       <div className="divcards">
-        {properties.map((property) => (
-          <PropertyCard
-            key={property.Prop_ID}
-            property={property}
-            onBuyClick={handleBuyClick}
-          />
-        ))}
+        {Array.isArray(properties) && properties.length > 0 ? (
+          properties.map((property) => (
+            <PropertyCard
+              key={property._id}
+              property={property}
+              onBuyClick={handleBuyClick}
+            />
+          ))
+        ) : (
+          <h2>No properties found.</h2> 
+        )}
       </div>
     </>
   );

@@ -3,25 +3,15 @@ import axios from "axios";
 
 const PropertyCard = ({ property, onBuyClick }) => {
   const [showDetails, setShowDetails] = useState(false);
-  const [builderDetails, setBuilderDetails] = useState([]);
-
   const handleBackClick = () => {
     setShowDetails(false);
   };
 
   const storedUser = localStorage.getItem("user");
-  const userjson = JSON.parse(storedUser);
-  const id = userjson.userid;
-
+  const builderDetails = JSON.parse(storedUser);
+  
   const handleBuyClick = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/search/${property.Prop_ID}`
-      );
-      setBuilderDetails(response.data);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    }
+    
     setShowDetails(true);
     onBuyClick(property);
   };
@@ -37,18 +27,19 @@ const PropertyCard = ({ property, onBuyClick }) => {
           <h1>Builder Details</h1>
           <figure>
             <img
-              src={`data:image/png;base64,${builderDetails.user_img}`}
+            src={`http://localhost:5000/img/users/${builderDetails.data.user.photo}`}
+
               alt="Builder"
               width="100%"
               height="230px"
             />
-            <figcaption>{builderDetails.User_Name}</figcaption>
+            <figcaption>{builderDetails.data.user.name}</figcaption>
           </figure>
 
-          <h3>{builderDetails.User_Name} </h3>
+          <h3>{builderDetails.data.user.name} </h3>
           <hr />
-          <h5>Phone: {builderDetails.Contact} </h5>
-          <h5>Email: {builderDetails.Email} </h5>
+          <h5>Phone: {builderDetails.data.user.contact} </h5>
+          <h5>Email: {builderDetails.data.user.email} </h5>
 
           {/* Back button */}
           <button
@@ -63,25 +54,26 @@ const PropertyCard = ({ property, onBuyClick }) => {
         <div>
           <figure>
             <img
-              src={`data:image/png;base64,${property.prop_image}`}
+              src={`http://localhost:5000/img/properties/${property.image}`}
+
               alt="Property"
               width="100%"
               height="230px"
             />
-            <figcaption>{property.Desciption}</figcaption>
+            <figcaption>{property.description}</figcaption>
           </figure>
           <div className="card-body">
-            <h3 className="card-title">{property.Desciption}</h3>
+            <h3 className="card-title">{property.description}</h3>
             <div className="card-text">
               <br />
-              <h4>Price: ${property.Price}</h4>
+              <h4>Price: ${property.price}</h4>
               <div className="div_room_status">
-                <h4>Rooms: {property.Room}</h4>
-                <h4>Status: {property.Status}</h4>
+                <h4>Rooms: {property.room}</h4>
+                <h4>Status: {property.status}</h4>
               </div>
               <hr />
               <h6>
-                Address: {property.Adress}, Zip Code: {property.zipCode}
+                Address: {property.address}, Zip Code: {property.zipcode}
               </h6>
             </div>
 

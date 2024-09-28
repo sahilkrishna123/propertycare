@@ -58,7 +58,7 @@ function Navbar() {
                   <li className="navbar-item">
                     <a className="nav-link" href="/portfolio">
                     
-                      {/* {auth && JSON.parse(auth)?.data.user.name} */}
+                      {auth && JSON.parse(auth)?.data.user.name}
                     </a>
                   </li>
 
