@@ -10,4 +10,7 @@ router.post(
   propertyController.resizePropertyPhoto,
   propertyController.addProperty
 );
+
+router.get("/search-property", propertyController.searchProperties);
+
 export default router;

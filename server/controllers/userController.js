@@ -112,4 +112,19 @@ export const deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
+export const getUserPortfolio = catchAsync(async (req, res, next) => {
+  let query = User.findById(req.params.id).populate("property");
+
+  const doc = await query;
+
+  if (!doc) {
+    return next(new AppError("No document found with that ID", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: doc,
+  });
+});
+
 export const getUser = factory.getOne(User);

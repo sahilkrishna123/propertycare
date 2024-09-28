@@ -78,5 +78,40 @@ export const addProperty = catchAsync(async (req, res, next) => {
   });
 });
 
-// Route setup example:
-// app.post('/addProperty', uploadPropertyPhoto, resizePropertyPhoto, addProperty);
+export const searchProperties = async (req, res) => {
+  try {
+    const { city, rooms, status } = req.query;
+
+    // Build the query based on provided filters
+    const query = {};
+
+    if (city) {
+      query.address = new RegExp(city, "i"); // Case-insensitive search for city
+    }
+
+    if (rooms) {
+      query.room = rooms;
+    }
+
+    if (status) {
+      query.status = status;
+    }
+
+    // Perform the query on the Property collection
+    const properties = await Property.find(query);
+
+    if (!properties || properties.length === 0) {
+      return res.status(404).json({ message: "No properties found" });
+    }
+
+    console.log(properties);
+
+    res.status(200).json({
+      status: "success",
+      data: properties,
+    });
+  } catch (error) {
+    console.error("Error fetching properties:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};

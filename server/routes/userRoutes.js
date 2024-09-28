@@ -12,7 +12,7 @@ router.post(
 );
 router.post("/login", authController.login);
 
-router.get("/portfolio/:id", userController.getUser);
+router.get("/portfolio/:id", userController.getUserPortfolio);
 
 ///////////////////////////
 

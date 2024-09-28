@@ -48,6 +48,7 @@ export const signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
     contact: req.body.contact,
     usertype: req.body.usertype,
+    photo: req.file.filename,
   });
 
   // Send token and response

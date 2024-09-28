@@ -29,25 +29,9 @@ const __filename = fileURLToPath(import.meta.url); // get the resolved path to t
 const __dirname = path.dirname(__filename); // get the name of the directory
 app.use(express.static(`${__dirname}/public`));
 
-// Setting Templating Engine
-// app.set("view engine", "pug");
-// app.set("views", path.join(__dirname, "views"));
-
 // 1) GLOBAL MIDDLEWARES
 
 app.use(cors());
-// app.use(
-//   cors({
-//     origin: "https://myschool-mern-app-backend.vercel.app",
-//     credentials: true,
-//   })
-// );
-// Access-Control-Allow-Origin *
-// api.natours.com, front-end natours.com
-// app.use(cors({
-//   origin: 'https://www.natours.com'
-// }))
-// Access-Control-Allow-Headers: Authorization, Content-Type
 
 // Set Security HTTP Headers
 app.use(helmet());
@@ -74,50 +58,7 @@ app.use(mongoSanitize());
 // Data sanitization against XSS
 app.use(xss());
 
-// Prevent parameter pollution
-// app.use(
-//   hpp({
-//     whitelist: [
-//       "duration",
-//       "ratingsQuantity",
-//       "ratingsAverage",
-//       "maxGroupSize",
-//       "difficulty",
-//       "price",
-//     ],
-//   })
-// );
-
 app.use(compression());
-
-// // Initialize DynamoDB client with region from environment variables
-// const client = new DynamoDBClient({
-//   region: process.env.AWS_REGION, // Use region from .env
-// });
-// const docClient = DynamoDBDocumentClient.from(client);
-
-// app.get("/", (req, res) => {
-//   // res.send("Hello Krishna");
-//   res.sendFile(path.join(__dirname, "public", "home.html"));
-// });
-
-// app.post("/add-item", async (req, res) => {
-//   const command = new PutCommand({
-//     TableName: "general_ledger",
-//     Item: {
-//       gr_num: 22, // Sample data
-//     },
-//   });
-
-//   try {
-//     const response = await docClient.send(command);
-//     console.log("Item added:", response);
-//     res.json({ success: true, data: response });
-//   } catch (error) {
-//     console.error("Error adding item:", error);
-//     res.status(500).json({ success: false, error: error.message });
-//   }
-// });
 
 // Routes
 app.use("/api/v1/users", userRouter);
