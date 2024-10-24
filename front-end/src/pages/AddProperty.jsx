@@ -65,7 +65,7 @@ function AddProperty() {
       }
 
       const userjson = JSON.parse(storedUser);
-      console.log(userjson);
+      // console.log("UserID",userjson);
 
       const id = userjson.data.user._id;
 

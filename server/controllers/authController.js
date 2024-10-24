@@ -19,7 +19,7 @@ const createSendToken = (user, statusCode, req, res) => {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
-    httpOnly: true,
+    // httpOnly: true,
     // secure: req.secure || req.headers["x-forwarded-proto"] === "https",
     secure: process.env.NODE_ENV === "production",
 
@@ -50,7 +50,10 @@ export const signup = catchAsync(async (req, res, next) => {
     usertype: req.body.usertype,
     photo: req.file.filename,
   });
+  const url = `${req.protocol}://${req.get("host")}/me`;
+  // console.log(url);
 
+  await new Email(newUser, url).sendWelcome();
   // Send token and response
   createSendToken(newUser, 201, req, res);
 });
@@ -81,6 +84,7 @@ export const login = catchAsync(async (req, res, next) => {
 
 export const protect = catchAsync(async (req, res, next) => {
   // 1) Getting token and check of it's there
+
   let token;
   if (
     req.headers.authorization &&

@@ -46,7 +46,6 @@ export const resizePropertyPhoto = catchAsync(async (req, res, next) => {
 // Controller for adding a property
 export const addProperty = catchAsync(async (req, res, next) => {
   const userId = req.body.userId;
-
   // Create a new property using the Property model
   const newProperty = await Property.create({
     description: req.body.description,
@@ -56,7 +55,7 @@ export const addProperty = catchAsync(async (req, res, next) => {
     address: req.body.address,
     zipcode: req.body.zipcode,
     image: req.body.image, // The image filename from req.body
-    // userId: req.body.userId,
+    userId: req.body.userId,
   });
 
   // 2. Add the newly created property ObjectId to the user's 'property' field
@@ -86,7 +85,7 @@ export const searchProperties = async (req, res) => {
     const query = {};
 
     if (city) {
-      query.address = new RegExp(city, "i"); // Case-insensitive search for city
+      query.address = new RegExp(city, "i");
     }
 
     if (rooms) {
@@ -115,3 +114,18 @@ export const searchProperties = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const getuserOnProperty = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+
+  const property = await Property.findById(id).populate("userId");
+
+  const selectedUser = property.userId;
+
+  console.log("selectedUser:", selectedUser);
+
+  res.status(200).json({
+    status: "success",
+    data: selectedUser,
+  });
+});
